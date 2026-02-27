@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anh Xin Lỗi Bé</title>
+
+<style>
+body{
+    margin:0;
+    padding:0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right,#ff9a9e,#fad0c4);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    overflow:hidden;
+}
+
+.container{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+    text-align:center;
+    max-width:400px;
+    position:relative;
+}
+
+h1{
+    color:#ff4d6d;
+    font-size:20px;
+}
+
+button{
+    padding:10px 20px;
+    margin:10px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    transition:0.3s;
+    position:relative;
+}
+
+.yes{
+    background:#ff4d6d;
+    color:white;
+}
+
+.no{
+    background:#ccc;
+    position:absolute;
+}
+
+button:hover{
+    transform:scale(1.1);
+}
+
+#videoScreen{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:black;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+}
+
+#videoScreen video{
+    width:80%;
+    max-width:800px;
+}
+
+.heart{
+    position:absolute;
+    font-size:25px;
+    animation: floatUp 3s linear forwards;
+}
+
+@keyframes floatUp{
+    0%{opacity:1; transform:translateY(0);}
+    100%{opacity:0; transform:translateY(-300px);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="box">
+
+<h1>Anh xin lỗi bé ,anh sai rồi bé cho anh xin lỗi nhá</h1>
+
+<button class="yes" onclick="sayYes()">Có</button>
+<button class="no" id="noBtn">Không</button>
+
+</div>
+
+<!-- VIDEO FULL MÀN HÌNH -->
+<div id="videoScreen">
+    <h1 style="color:white;">Anh yêu bé nhiều lắm ❤️</h1>
+    <video id="video" controls>
+        <source src="video.mp4" type="video/mp4">
+    </video>
+</div>
+
+<!-- Nhạc nền -->
+<audio id="music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const box = document.getElementById("box");
+
+noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * (box.clientWidth - 100);
+    const y = Math.random() * (box.clientHeight - 50);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+});
+
+function sayYes(){
+    document.body.style.background="black";
+    document.getElementById("box").style.display="none";
+    document.getElementById("videoScreen").style.display="flex";
+
+    const video = document.getElementById("video");
+    video.play();
+
+    const music = document.getElementById("music");
+    music.play();
+
+    for(let i=0;i<20;i++){
+        let heart = document.createElement("div");
+        heart.innerHTML="❤️";
+        heart.classList.add("heart");
+        heart.style.left=Math.random()*window.innerWidth+"px";
+        heart.style.top=window.innerHeight+"px";
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),3000);
+    }
+}
+</script>
+
+</body>
+</html>
